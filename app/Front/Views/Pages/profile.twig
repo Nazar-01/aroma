@@ -1,0 +1,88 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<br><br><br><br>
+<main class="profile">
+
+	<div class="container">
+		<h2>
+			<span class="section-intro__style">
+				Профиль
+			</span>
+		</h2>
+		<br><br>
+		{% if message %}
+			<div class="{{ class }}" role="alert">
+			{{ message }}
+			</div>
+		{% endif %}
+		<div class="row">
+			<div class="col-12 col-lg-4">
+				<form method="POST" enctype="multipart/form-data" action="/update-photo">
+					<div class="inner bg-soft">
+						<center><h4>Загрузите фотографию профиля</h4></center>
+						<div class="square">
+							<img width="100" src="/uploads/{{ user.photo }}" alt="">
+						</div>
+						<div class="form-group change-avatar">
+							<input type="file" name="photo">
+						</div>
+						<div class="buttons">
+							<button class="btn btn-1 btn-light">Изменить</button>
+							<button type="button" onclick="window.location.href = '/delete-photo';" class="btn btn-2 btn-light">Удалить</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-12 col-lg-8">
+				<form action="/update-user" method="POST">
+					<div class="inner bg-soft">
+						<h4>Контактная информация</h4>
+						<div class="row mt-3">
+							<div class="col-12 col-lg-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Имя</label>
+									<input value="{{ user.name }}" name="name" type="text" class="form-control" aria-describedby="emailHelp">
+								</div>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="form-group">
+									<label for="exampleInputPassword1">Email</label>
+									<input value="{{ user.email }}" name="email" type="email" class="form-control">
+								</div>
+							</div>
+						</div>
+						<br>
+						<h4>Сменить пароль</h4>
+						<div class="row mt-3">
+							<div class="col-12 col-lg-6">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Старый пароль</label>
+									<input name="old_pass" type="password" class="form-control">
+								</div>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="form-group">
+									<label for="exampleInputPassword1">Новый пароль</label>
+									<input name="pass1" type="password" class="form-control">
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-group">
+									<label for="exampleInputPassword1">Подтвердите пароль</label>
+									<input name="pass2" type="password" class="form-control">
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<div class="buttons buttons-2">
+						<button onclick="window.location.href = '/delete-user';" type="button" class="btn btn-danger">Удалить профиль</button>
+						<button class="btn btn-primary">Обновить профиль</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+	<br><br>
+	{% endblock %}

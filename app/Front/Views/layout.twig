@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Aroma Shop - Home</title>
+
+	<link rel="icon" href="{{ path }}/img/Fevicon.png" type="image/png">
+	<link rel="stylesheet" href="{{ path }}/vendors/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="{{ path }}/vendors/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="{{ path }}/vendors/themify-icons/themify-icons.css">
+	<link rel="stylesheet" href="{{ path }}/vendors/nice-select/nice-select.css">
+	<link rel="stylesheet" href="{{ path }}/vendors/owl-carousel/owl.theme.default.min.css">
+	<link rel="stylesheet" href="{{ path }}/vendors/owl-carousel/owl.carousel.min.css">
+
+	<link rel="stylesheet" href="{{ path }}/css/style.css">
+	<link rel="stylesheet" href="{{ path }}/css/changes.css">
+</head>
+<body>
+	<!--================ Start Header Menu Area =================-->
+	<header class="header_area">
+		<div class="main_menu">
+			<nav class="navbar navbar-expand-lg navbar-light">
+				<div class="container">
+					<a class="navbar-brand logo_h" href="/"><img src="{{ path }}/img/logo.png" alt=""></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+
+					
+
+						<li class="nav-item">
+							<a class="nav-link" href="/">Главная</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="/products">Товары</a>
+						</li>
+
+						<li class="nav-item">
+							<a class="nav-link" href="/categories">Категории</a>
+						</li>
+
+						{% if user %}
+
+						<li class="nav-item submenu dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false">Аккаунт</a>
+							<ul class="dropdown-menu">
+
+								<li class="nav-item">
+									<a class="nav-link" href="/profile">Профиль</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/orders">Заказы</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/logout">Выход</a>
+								</li>
+
+							</ul>
+						</li>
+
+						{% else %}
+
+						<li class="nav-item">
+							<a class="nav-link" href="/login">Войти</a>
+						</li>
+
+						{% endif %}	
+
+					</ul>
+
+					<ul class="nav-shop">
+						<li class="nav-item">
+							<a href="/cart">
+								<button><i class="ti-shopping-cart"></i><span class="nav-shop__circle">{{obj.getProductsCount()}}</span>
+								</button>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
+<!--================ End Header Menu Area =================-->
+
+<ul class="temp-menu">
+
+	<li>
+		<a href="/">Главная</a>
+	</li>
+
+	<li>
+		<a href="/products">Товары</a>
+	</li>
+
+	<li>
+		<a href="/product/5">Страница товара</a>
+	</li>
+
+	<li>
+		<a href="/categories">Категории</a>
+	</li>
+
+	<li>
+		<a href="/orders">Заказы</a>
+	</li>
+
+	<li>
+		<a href="/checkout">Чекаут</a>
+	</li>
+
+	<li>
+		<a href="/register">Регистрация</a>
+	</li>
+
+	<li>
+		<a href="/login">Авторизация</a>
+	</li>
+
+	<li>
+		<a href="/cart">Корзина</a>
+	</li>
+
+	<li>
+		<a href="/profile">Профиль</a>
+	</li>
+
+</ul>
+
+<div class="alert-message">
+	<div class="alert alert-success" role="alert">
+		
+	</div>
+</div>
+
+{% block content %}
+
+{% endblock %}
+
+{{ obj.getSubscription() }}
+
+<!--================ Start footer Area  =================-->	
+<footer class="footer">
+	<div class="footer-area">
+		<div class="container">
+			<div class="row section_gap">
+
+				<div class="col-lg-4 col-md-6 col-sm-6">
+					<div class="single-footer-widget tp_widgets">
+						<h4 class="footer_title large_title">Наша миссия</h4>
+						<p>
+							Наша компания была основана с целью предоставления высококачественных, стильных аксессуаров по доступным ценам. Мы стремимся представить вам последние тенденции и уникальные находки со всего мира, и все это в одном удобном интернет-магазине. 
+						</p>
+					</div>
+				</div>
+
+				<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+					<div class="single-footer-widget tp_widgets">
+						<h4 class="footer_title">Наши ссылки</h4>
+						<ul class="list">
+							<li><a href="/">Главная</a></li>
+							<li><a href="/products">Товары</a></li>
+							<li><a href="/categories">Категории</a></li>
+							<li><a href="/cart">Корзина</a></li>
+						</ul>
+					</div>
+				</div>
+				
+				<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
+					<div class="single-footer-widget tp_widgets">
+						<h4 class="footer_title">Контакты</h4>
+						<div class="ml-40">
+							<p class="sm-head">
+								<span class="fa fa-location-arrow"></span>
+								Главный офис
+							</p>
+							<p>город Ногинск, проезд Славы, 12</p>
+
+							<p class="sm-head">
+								<span class="fa fa-phone"></span>
+								Телефон
+							</p>
+							<p>
+								+7(495)599-62-95
+							</p>
+
+							<p class="sm-head">
+								<span class="fa fa-envelope"></span>
+								Email
+							</p>
+							<p>
+								free@infoexample.com <br>
+								www.infoexample.com
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</footer>
+<!--================ End footer Area  =================-->
+
+
+
+<script src="{{ path }}/vendors/jquery/jquery-3.2.1.min.js"></script>
+<script src="{{ path }}/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="{{ path }}/vendors/skrollr.min.js"></script>
+<script src="{{ path }}/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="{{ path }}/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="{{ path }}/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="{{ path }}/vendors/mail-script.js"></script>
+<script src="{{ path }}/js/main.js"></script>
+<script src="{{ path }}/js/changes.js"></script>
+</body>
+</html>

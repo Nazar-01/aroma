@@ -1,0 +1,61 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Категории
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="form-group">
+          <a href="/admin/categories/create" class="btn btn-success">Добавить</a>
+        </div>
+        <table id="example1" class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Фото</th>
+            <th>Название</th>
+            <th>Действия</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          {% for category in categories %}
+
+            <tr>
+            <td>{{ category.id }}</td>
+            <td><img src="/uploads/{{ category.photo }}" alt="" width="100"></td>
+            <td>{{ category.title }}</td>
+            <td class="td-actions">
+              <a href="/admin/category/{{ category.id }}/edit" class="fa fa-pencil"></a>
+              <form method="GET" action="/admin/category/{{ category.id }}/delete">
+              <button class="delete-button" onclick="return confirm('are you sure?');" type="submit" class="delete">
+              <i class="fa fa-remove"></i>
+              </button>
+              </form>
+            </td>
+          </tr>
+
+          {% endfor %}
+
+          </tfoot>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock %}

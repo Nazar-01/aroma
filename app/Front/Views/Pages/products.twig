@@ -1,0 +1,110 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main>
+	<!-- ================ start banner area ================= -->	
+	<section class="blog-banner-area" id="category">
+		<div class="container h-100">
+			<div class="blog-banner">
+				<div class="text-center">
+					<h1>Товары</h1>
+					<nav aria-label="breadcrumb" class="banner-breadcrumb">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="/">Главная</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Товары</li>
+						</ol>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ================ end banner area ================= -->
+
+
+	<!-- ================ category section start ================= -->		  
+	<section class="section-margin--small mb-5">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-12">
+					<!-- Start Filter Bar -->
+					<div class="filter-bar d-flex flex-wrap align-items-center">
+
+						<div class="search-outer">
+							<div class="input-group filter-bar-search">
+								<input type="text" placeholder="Поиск">
+								<div class="input-group-append">
+									<button class="search-products" type="button"><i class="ti-search"></i></button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- End Filter Bar -->
+					<!-- Start Best Seller -->
+					<section class="lattest-product-area pb-40 category-list">
+						<div class="row">
+
+						{% if products %}
+
+							{% for product in products %}
+
+							<div class="col-md-6 col-lg-4 card__outer">
+								<div class="card text-center card-product">
+
+									<a href="/product/{{ product.id }}">
+										<div class="card-product__img">
+											<img class="card-img" src="/uploads/{{ product.photo }}" alt="">
+											<ul class="card-product__imgOverlay">
+
+												<li>
+													<div class="product-data">
+														<input name="id" value="{{ product.id }}" type="hidden">
+														<button class="add-to-cart"><i class="ti-shopping-cart"></i></button>
+													</div>
+												</li>
+
+											</ul>
+										</div>
+									</a>
+									
+									<div class="card-body">
+										<p>{{ obj_product.getCategory(product.category_id) }}</p>
+										<h4 class="card-product__title"><a href="/product/{{ product.id }}">{{ product.title }}</a></h4>
+										<p class="card-product__price">{{ product.price|number_format(0) }} ₽</p>
+									</div>
+								</div>
+							</div>
+
+							{% endfor %}
+
+							
+							<div class="not-found">По вашему запросу ничего не найдено!</div>
+							
+
+						{% else %}
+
+							<div class="col-12">
+							<br><br>
+							<h2>
+							В этой категории нет товаров!
+							</h2>
+							</div>
+
+						{% endif %}
+
+							
+
+						</div>
+					</section>
+					<!-- End Best Seller -->
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ================ category section end ================= -->		  
+
+	{{ obj_product.getRecommended() }}
+
+</main>
+{% endblock %}

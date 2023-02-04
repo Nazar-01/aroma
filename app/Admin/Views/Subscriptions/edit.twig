@@ -1,0 +1,53 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Редактировать подписчика
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <form method="POST" action="/admin/sub/update">
+
+      {% if(errors) %}
+      <div class="alert alert-danger" role="alert">
+        {{ errors }}
+      </div>
+      {% endif %}
+
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-body">
+          <div class="col-md-6">
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email</label>
+              <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ sub.email }}">
+            </div>
+
+            <div class="form-group">
+              <input name="id" type="hidden" value="{{ sub.id }}">
+            </div>
+
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <a href="/admin/subs">
+            Назад
+          </a>
+          <button class="btn btn-success pull-right">Добавить</button>
+        </div>
+        <!-- /.box-footer-->
+      </div>
+      <!-- /.box -->
+    </form>
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock %}

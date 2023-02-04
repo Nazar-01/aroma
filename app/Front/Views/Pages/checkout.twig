@@ -1,0 +1,90 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main>
+  <section class="blog-banner-area" id="category">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center">
+          <h1>Оформление заказа</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Главная</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Оформление заказа</li>
+          </ol>
+      </nav>
+  </div>
+</div>
+</div>
+</section>
+<!-- ================ end banner area ================= -->
+
+
+<!--================Checkout Area =================-->
+<section class="checkout_area section-margin--small">
+    <div class="container">
+        <div class="billing_details">
+
+            {% if message %}
+            <div class="{{ class }}" role="alert">
+              {{ message }}
+          </div>
+          {% endif %}
+
+          <br>
+
+            <div class="row">
+
+                <form class="row contact_form col-12" action="/make-order" method="POST" novalidate="novalidate">
+
+                    <div class="col-lg-8">
+                        <h3>Billing Details</h3>
+                        
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="add1" name="country" placeholder="Страна">
+                            <span class="placeholder" data-placeholder="Address line 01"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="add2" name="city" placeholder="Город">
+                            <span class="placeholder" data-placeholder="Address line 02"></span>
+                        </div>
+                        <div class="col-md-12 form-group p_star">
+                            <input type="text" class="form-control" id="city" name="address" placeholder="Адрес">
+                            <span class="placeholder" data-placeholder="Town/City"></span>
+                        </div>
+                        
+                        <div class="col-md-12 form-group mb-0">
+                            <textarea class="form-control" name="comment" id="message" rows="1" placeholder="Комментарий"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="order_box">
+                            <h2>Ваш заказ</h2>
+                            <ul class="list">
+                                <li><a href="#"><h4>Товар<span>Цена</span></h4></a></li>
+
+                                {% for product in products %}
+
+                                <li><a href="#">{{ obj_cart.getProduct(product.id).title }} <span class="middle">x {{ product.count }}</span> <span class="last">{{ obj_cart.getProduct(product.id).price|number_format(0) }} ₽</span></a></li>
+
+                                {% endfor %}
+                            </ul>
+                            <ul class="list list_2">
+                                <li><a href="#">Total <span>{{ obj_cart.getTotalPrice()|number_format(0) }} ₽</span></a></li>
+                            </ul>
+                            <br><br>
+                            <div class="text-center">
+                                <button class="button button-paypal">Подтвердить заказ</button>
+                          </div>
+                      </div>
+                  </div>
+
+              </form>
+
+          </div>
+      </div>
+  </div>
+</section>
+<!--================End Checkout Area =================-->
+</main>
+{% endblock %}

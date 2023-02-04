@@ -1,0 +1,95 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<div class="content-wrapper products-wrapper">
+  <section class="content-header">
+    <h1>
+      Товары
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="form-group">
+          <a href="/admin/products/create" class="btn btn-success">Добавить</a>
+        </div>
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Фото</th>
+            <th scope="col">Название</th>
+            <th scope="col">Контент</th>
+            <th scope="col">Описание</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Категория</th>
+            <th scope="col">Наличие</th>
+            <th scope="col">Рекомендовать</th>
+            <th scope="col">Бестселлер</th>
+            <th scope="col">Действия</th>
+          </tr>
+          </thead>
+          <tbody>
+
+          {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td><img src="/uploads/{{ product.photo }}" alt="" width="100"></td>
+            <td>{{ product.title }}</td>
+            <td class="td-content">{{ product.content }}</td>
+            <td class="td-description">{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ obj_product.getProductCategory(product.category_id) }}</td>
+            <td>
+              {% if product.availability %}
+                Есть
+              {% else %}
+                Нет
+              {% endif %}
+            </td>
+
+            <td>
+              {% if product.recommend %}
+                Да
+              {% else %}
+                Нет
+              {% endif %}
+            </td>
+
+            <td>
+              {% if product.bestseller %}
+                Да
+              {% else %}
+                Нет
+              {% endif %}
+            </td>
+
+            <td class="td-actions">
+              <a href="/admin/product/{{ product.id }}/edit" class="fa fa-pencil"></a>
+              <form method="GET" action="/admin/product/{{ product.id }}/delete">
+              <button class="delete-button" onclick="return confirm('are you sure?');" type="submit" class="delete">
+              <i class="fa fa-remove"></i>
+              </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+  </section>
+  <!-- /.content -->
+</div>
+
+{% endblock %}

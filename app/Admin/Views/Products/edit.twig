@@ -1,0 +1,134 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Редактировать продукт
+      </h1>
+    </section>
+
+    
+    <section class="content">
+
+    <form enctype="multipart/form-data" method="POST" action="/admin/product/update">
+
+    {% if(errors) %}
+      <div class="alert alert-danger" role="alert">
+      {{ errors }}
+      </div>
+    {% endif %}
+
+      <div class="box">
+        <div class="box-body">
+          <div class="col-md-6">
+
+            <div class="form-group">
+              <label for="exampleInputFile">Фото</label>
+              <input name="photo" type="file" id="exampleInputFile">
+            </div>
+
+            <img width="200" src="/uploads/{{ product.photo }}" alt="">
+            <br><br>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Название</label>
+              <input name="title" type="text" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ product.title }}">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Контент</label>
+              <textarea name="content" id="" cols="30" rows="10" class="form-control">{{ product.content }}</textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Описание</label>
+              <textarea name="description" id="" cols="30" rows="10" class="form-control">{{ product.description }}</textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleInputEmail1">Цена</label>
+              <input name="price" type="number" class="form-control" id="exampleInputEmail1" placeholder="" value="{{ product.price }}">
+            </div>
+
+            <div class="form-group">
+              <label>Категория</label>
+              <select name="category" class="form-control select2" style="width: 100%;">
+
+              {% for category in categories %}
+                {% if obj_product.getProductCategory(product.category_id) == category.title %}
+                  <option value="{{ category.id }}" selected="selected">{{ category.title }}</option>
+                {% else %}
+                  <option value="{{ category.id }}">{{ category.title }}</option>
+                {% endif %}
+              {% endfor %}
+              
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>
+              {% if product.availability %}
+                <input value="1" name="availability" checked type="checkbox" class="minimal">
+              {% else %}
+                <input value="0" name="availability" type="hidden" class="minimal">
+                <input value="1" name="availability" type="checkbox" class="minimal">
+              {% endif %}
+              </label>
+              <label>
+                Есть в наличии
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+              {% if product.recommend %}
+                <input value="1" name="recommend" checked type="checkbox" class="minimal">
+              {% else %}
+                <input value="0" name="recommend" type="hidden" class="minimal">
+                <input value="1" name="recommend" type="checkbox" class="minimal">
+              {% endif %}
+              </label>
+              <label>
+                Рекомендовать
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label>
+              {% if product.bestseller %}
+                <input value="1" name="bestseller" checked type="checkbox" class="minimal">
+              {% else %}
+                <input value="0" name="bestseller" type="hidden" class="minimal">
+                <input value="1" name="bestseller" type="checkbox" class="minimal">
+              {% endif %}
+              </label>
+              <label>
+                Bestseller
+              </label>
+            </div>
+
+            <div class="form-group">
+              <input name="id" type="hidden" value="{{ product.id }}">
+            </div>
+
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <a href="/admin/products">
+            Назад
+          </a>
+          <button class="btn btn-success pull-right">Подтвердить</button>
+        </div>
+        <!-- /.box-footer-->
+      </div>
+
+      </form>
+      
+
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

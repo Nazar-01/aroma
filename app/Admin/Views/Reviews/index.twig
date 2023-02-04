@@ -1,0 +1,78 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<div class="content-wrapper products-wrapper">
+  <section class="content-header">
+    <h1>
+      Отзывы
+    </h1>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <!-- /.box-header -->
+      <div class="box-body">
+
+      {% if reviews %}
+        
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Автор</th>
+              <th scope="col">Товар</th>
+              <th scope="col">Оценка</th>
+              <th scope="col">Комментарий</th>
+              <th scope="col">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+
+          {% for review in reviews %}
+
+            <tr>
+              <td>{{ review.id }}</td>
+              <td>{{ obj_review.getAuthor(review.id) }}</td>
+              <td>{{ obj_review.getProduct(review.id) }}</td>
+              <td>{{ review.score }}</td>
+              <td>{{ review.message }}</td>
+              <td class="td-actions">
+
+                {% if obj_review.checkApproved(review.id) %}
+                  <a href="/admin/reviews/{{ review.id }}/prohibit" class="fa fa-lock"></a>
+                {% else %}
+                  <a href="/admin/reviews/{{ review.id }}/approve" class="fa fa-thumbs-o-up"></a>
+                {% endif %}
+
+                
+                <form method="GET" action="/admin/review/{{ review.id }}/delete">
+                  <button class="delete-button" onclick="return confirm('are you sure?');" type="submit" class="delete">
+                    <i class="fa fa-remove"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+
+          {% endfor %}
+
+          {% else %}
+
+            <h1>Нет отзывов</h1>
+
+          {% endif %}
+
+          </tbody>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+  </section>
+  <!-- /.content -->
+</div>
+
+{% endblock %}

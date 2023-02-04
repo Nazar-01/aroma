@@ -1,0 +1,205 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main>
+  <section class="blog-banner-area" id="blog">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center">
+          <h1>Страница товара</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Главная</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Страница товара</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end banner area ================= -->
+
+
+  <!--================Single Product Area =================-->
+  <div class="product_image_area">
+    <div class="container">
+      <div class="row s_product_inner">
+        <div class="col-lg-6">
+          <div class="owl-carousel owl-theme s_Product_carousel">
+            <div class="single-prd-item">
+              <img class="img-fluid" src="/uploads/{{ product.photo }}" alt="">
+            </div>
+            <!-- <div class="single-prd-item">
+              <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+            </div>
+            <div class="single-prd-item">
+              <img class="img-fluid" src="img/category/s-p1.jpg" alt="">
+            </div> -->
+          </div>
+        </div>
+        <div class="col-lg-5 offset-lg-1">
+          <div class="s_product_text">
+            <h3>{{ product.title }}</h3>
+            <h2>{{ product.price|number_format(0) }} ₽</h2>
+            <ul class="list">
+              <li><a class="active" href="#"><span>Категоря</span> : {{ obj_product.getCategory(product.category_id) }}</a></li>
+              <li><a href="#"><span>Наличие</span> : 
+
+              {% if product.availability %}
+                Есть
+              {% else %}
+                Нет
+              {% endif %}
+
+              </a></li>
+            </ul>
+            <p>{{ product.content }}</p>
+            <div class="product_count">
+              <label for="qty">Количество:</label>
+              
+              <input min="1" type="number" name="count" id="sst" size="2" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+              
+
+              <a id="a__add-to-cart" class="button primary-btn add-to-cart" href="#">
+                В корзину
+                <div class="product-data">
+                  <input name="id" value="{{ product.id }}" type="hidden">
+                </div>
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--================End Single Product Area =================-->
+
+  <!--================Product Description Area =================-->
+  <section class="product_description_area">
+    <div class="container">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+
+        <li class="nav-item">
+          <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Описание</a>
+        </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
+           aria-selected="false">Отзывы</a>
+        </li>
+
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <p>
+            {{ product.description }}
+          </p>
+        </div>
+        
+        <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="row total_rate">
+                <div class="col-12">
+                  <div class="box_total">
+                    <h5>Оценка</h5>
+                    <h4>{{ obj_review.getAverageRating(product.id) }}</h4>
+                  </div>
+                </div>
+              </div>
+              <br>
+
+              <div class="review_list">
+
+              {% set reviews = obj_review.getReviews(product.id) %}
+
+              {% if reviews %}
+
+                {% for review in reviews %}
+
+                <div class="review_item">
+                  <div class="media">
+                    <div class="d-flex">
+                      <img class="user-photo" src="/uploads/{{ obj_review.getAuthor(review.user_id).photo }}" alt="">
+                    </div>
+                    <div class="media-body">
+                      <h4>{{ obj_review.getAuthor(review.user_id).name }}</h4>
+
+                      
+                      
+                      <div class="rating-result">
+                      {% for span in range(1, review.score) %}
+                        <span class="active"></span>
+                      {% endfor %}
+                      
+                      {% if review.score != 5 %}
+                        {% for span in range(1, 5 - review.score) %}
+                        <span></span>
+                      {% endfor %}
+                    {% endif %}
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <p>{{ review.message }}</p>
+                </div>
+
+              {% endfor %}
+
+              {% else %}
+
+                <div>У товара пока нет отзывов!</div>
+
+              {% endif %}
+
+              </div>
+
+            </div>
+
+            <div class="col-lg-6">
+            <div id="review-alert" role="alert">
+              A simple danger alert—check it out!
+            </div>
+              <div class="review_box">
+                <h4>Оставить отзыв</h4>
+                <p>Ваша оценка:</p>
+                <br>
+
+                <div class="review-info">
+                <input name="product_id" type="hidden" value="{{ product.id }}">
+                  <div class="rating-area">
+                    <input type="radio" id="star-5" name="rating" value="5">
+                    <label for="star-5" title="Оценка «5»"></label> 
+                    <input type="radio" id="star-4" name="rating" value="4">
+                    <label for="star-4" title="Оценка «4»"></label>    
+                    <input type="radio" id="star-3" name="rating" value="3">
+                    <label for="star-3" title="Оценка «3»"></label>  
+                    <input type="radio" id="star-2" name="rating" value="2">
+                    <label for="star-2" title="Оценка «2»"></label>    
+                    <input type="radio" id="star-1" name="rating" value="1">
+                    <label for="star-1" title="Оценка «1»"></label>
+                  </div>
+                
+                  <div class="form-group">
+                    <textarea class="form-control different-control w-100" name="message" id="textarea" cols="30" rows="5" placeholder="Комментарий"></textarea>
+                  </div>
+                  <div class="form-group text-center text-md-right mt-3">
+                    <button type="submit" class="button button--active button-review">Отправить</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Product Description Area =================-->
+
+{{ obj.getRecommended() }}
+
+</main>
+{% endblock %}

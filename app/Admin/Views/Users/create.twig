@@ -1,0 +1,72 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Добавить пользователя
+        </h1>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <form enctype="multipart/form-data" action="/admin/users/store" method="POST">
+
+            {% if(errors) %}
+            <div class="alert alert-danger" role="alert">
+                {{ errors }}
+            </div>
+            {% endif %}
+
+            <!-- Default box -->
+            <div class="box">
+                <div class="box-body">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Имя</label>
+                            <input name="name" type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">E-mail</label>
+                            <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Пароль</label>
+                            <input name="password" type="password" class="form-control" id="exampleInputEmail1" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">Аватар</label>
+                            <input name="photo" type="file" id="exampleInputFile">
+
+                            <p class="help-block">Какое-нибудь уведомление о форматах..</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label>
+                                <input value="0" name="is_admin" type="hidden" class="minimal" checked>
+                                <input value="1" name="is_admin" type="checkbox" class="minimal">
+                            </label>
+                            <label>
+                                Права администратора
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <a href="/admin/users">
+                        <button class="btn btn-default">Назад</button>
+                    </a>
+                    <button class="btn btn-success pull-right">Добавить</button>
+                </div>
+                <!-- /.box-footer-->
+            </div>
+            <!-- /.box -->
+        </form>
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}

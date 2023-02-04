@@ -1,0 +1,76 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main>
+  <!-- ================ start banner area ================= --> 
+  <section class="blog-banner-area" id="category">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center">
+          <h1>Регистрация</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Главная</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Регистрация</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end banner area ================= -->
+  
+  <!--================Login Box Area =================-->
+  <section class="login_box_area section-margin">
+    <div class="container">
+
+    {% if message %}
+      <div class="{{ class }}" role="alert">
+      {{ message }}
+      </div>
+    {% endif %}
+
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="login_box_img">
+            <div class="hover">
+              <h4>Уже есть аккаунт?</h4>
+              <a class="button button-account" href="/login">Войти</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="login_form_inner register_form_inner">
+            <h3>Создание аккаунта</h3>
+            <form enctype="multipart/form-data" method="POST" class="row login_form" action="/register/store" id="register_form" >
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Имя пользователя" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Имя пользователя'">
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'">
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Подтердите пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Подтердите пароль'">
+              </div>
+              <div class="col-md-12 form-group">
+              <p class="profile-photo">Фото прфиля</p>
+              <input class="file-input" type="file" name="photo">
+              </div>
+              <div class="col-md-12 form-group">
+
+              </div>
+              <div class="col-md-12 form-group">
+                <button type="submit" value="submit" class="button button-register w-100">Зарегистрироваться</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Login Box Area =================-->
+</main>
+{% endblock %}

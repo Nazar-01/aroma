@@ -1,0 +1,39 @@
+<!-- ================ Best Selling item  carousel ================= --> 
+    <section class="section-margin calc-60px recommended">
+      <div class="container">
+        <div class="section-intro pb-60px">
+          <h2><span class="section-intro__style">Рекомендуем</span></h2>
+        </div>
+        <div class="owl-carousel owl-theme" id="bestSellerCarousel">
+
+        {% for rec in recommended %}
+
+          <div class="card text-center card-product">
+            
+            <a href="/product/{{ rec.id }}">
+              <div class="card-product__img">
+                <img class="img-fluid" src="/uploads/{{ rec.photo }}" alt="">
+                <ul class="card-product__imgOverlay">
+                 <li>
+                  <div class="product-data">
+                    <input name="id" value="{{ rec.id }}" type="hidden">
+                    <button class="add-to-cart"><i class="ti-shopping-cart"></i></button>
+                  </div>
+                </li>
+               </ul>
+              </div>
+            </a>
+            
+            <div class="card-body">
+              <p>{{ obj_product.getCategory(rec.category_id) }}</p>
+              <h4 class="card-product__title"><a href="/product/{{ rec.id }}">{{ rec.title }}</a></h4>
+              <p class="card-product__price">{{ rec.price|number_format(0) }} ₽</p>
+            </div>
+          </div>
+
+        {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    <!-- ================ Best Selling item  carousel end ================= --> 

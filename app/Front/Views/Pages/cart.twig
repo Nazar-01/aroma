@@ -1,0 +1,111 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main>
+  <!-- ================ start banner area ================= --> 
+  <section class="blog-banner-area" id="category">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center">
+          <h1>Корзина</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Главная</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Корзина</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end banner area ================= -->
+  
+  
+
+  <!--================Cart Area =================-->
+  <section class="cart_area">
+    <div class="container">
+      <div class="cart_inner">
+      {% if products %}
+        <div class="table-responsive">
+        <table class="table">
+
+        <thead>
+        <tr>
+        <th scope="col">Товар</th>
+        <th scope="col">Количество</th>
+        <th class="table-price" scope="col">Цена</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for product in products %}
+
+        <tr>
+        <td class="col">
+        <div class="media">
+        <div class="d-flex">
+        <img src="uploads/{{ obj_cart.getProduct(product.id).photo }}" alt="">
+        </div>
+        <div class="media-body">
+        <p>{{ obj_cart.getProduct(product.id).title }}</p>
+        </div>
+        </div>
+        </td>
+        <td class="col">
+        <div class="product_count">
+        <input type="hidden" name="id" value="{{product.id}}">
+        <input type="number" name="count" id="sst{{product.id}}" maxlength="12" value="{{ product.count }}" title="Quantity:"
+        class="input-text qty">
+        <button onclick="var result = document.getElementById('sst{{product.id}}'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+        class="increase items-count" type="button">+</button>
+        <button onclick="var result = document.getElementById('sst{{product.id}}'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+        class="reduced items-count" type="button">-</button>
+        </div>
+        </td>
+        <td class="col-12 table-price">
+        <h5>{{ obj_cart.getProduct(product.id).price|number_format(0) }} ₽</h5>
+        </td>
+        </tr>
+
+      {% endfor %}
+
+        </tbody>
+        </table>
+
+        <hr>
+
+        <div class="total__outer">
+        <div class="total">
+        <h5>Итого</h5>
+        <h5>{{ obj_cart.getTotalPrice()|number_format(0) }} ₽</h5>
+        </div>
+        </div>
+
+        <hr>
+
+        <div class="cart-buttons">
+        <button class="update-cart btn btn-1 btn-light">Обновить корзину</button>
+        <a href="/clear-cart">
+        <button type="button" class="btn btn-2 btn-light">Очистить корзину</button>
+        </a>
+        <a href="/checkout">
+        <button type="button" class="btn btn-2 btn-primary">перейти к оформлению</button>
+        </a>
+        </div>
+
+        </div>
+
+      {% else %}
+
+        <br><br>
+        <center><h3>Корзина пуста!</h3></center>
+
+      {% endif %}
+
+        </div>
+      </div>
+    </section>
+    <!--================End Cart Area =================-->
+  </main>
+  {% endblock %}

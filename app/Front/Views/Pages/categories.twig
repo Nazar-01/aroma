@@ -1,0 +1,53 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main>
+  <!-- ================ start banner area ================= --> 
+  <section class="blog-banner-area" id="category">
+    <div class="container h-100">
+      <div class="blog-banner">
+        <div class="text-center">
+          <h1>Категории</h1>
+          <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/">Главная</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Категории</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ================ end banner area ================= -->
+
+
+  <section class="section-margin calc-60px">
+      <div class="container">
+        <div class="section-intro pb-60px">
+          <h2><span class="section-intro__style">Категории</span></h2>
+        </div>
+        <div class="row">
+
+        {% for category in categories %}
+
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+              <a href="/products/{{category.id}}">
+                <div class="card-product__img">
+                  <img class="card-img" src="uploads/{{ category.photo }}" alt="">
+                </div>
+              </a>
+              <div class="card-body">
+                <h4 class="card-product__title"><a href="/products/{{category.id}}">{{ category.title }}</a></h4>
+              </div>
+            </div>
+          </div>
+
+        {% endfor %}
+
+        </div>
+      </div>
+    </section>      
+ 
+</main>
+{% endblock %}

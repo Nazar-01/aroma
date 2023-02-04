@@ -1,0 +1,110 @@
+{% extends "/layout.twig" %}
+
+{% block content %}
+<main class="site-main">
+    
+    <!--================ Hero banner start =================-->
+    <section class="hero-banner">
+      <div class="container">
+        <div class="row no-gutters align-items-center pt-60px">
+          <div class="col-5 d-none d-sm-block">
+            <div class="hero-banner__img">
+              <img class="img-fluid" src="{{ path }}/img/home/hero-banner.png" alt="">
+            </div>
+          </div>
+          <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+            <div class="hero-banner__content">
+              <h4>Идеальное место для всех ваших покупок</h4>
+              <h1>Только премиальные продукты</h1>
+              <p>Добро пожаловать в наш интернет-магазин аксессуаров! Мы предлагаем широкий выбор стильных и доступных аксессуаров на все случаи жизни. От украшений и сумочек до шарфов и прочего, вы найдете все, что вам нужно!</p>
+              <a class="button button-hero" href="#bestsellers">Скорее к покупкам</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--================ Hero banner start =================-->
+
+    <!--================ Hero Carousel start =================-->
+    <section class="section-margin mt-0">
+      <div class="owl-carousel owl-theme hero-carousel">
+
+        {% for category in categories %}
+
+        <div class="hero-carousel__slide">
+          <img src="uploads/{{ category.photo }}" alt="" class="img-fluid">
+          <a href="products/{{ category.id }}" class="hero-carousel__slideOverlay">
+            <h3>{{ category.title }}</h3>
+          </a>
+        </div>
+
+        {% endfor %}
+
+      </div>
+    </section>
+    <!--================ Hero Carousel end =================-->
+
+    <!-- ================ trending product section start ================= -->
+
+    <section id="bestsellers" class="section-margin calc-60px">
+      <div class="container">
+        <div class="section-intro pb-60px">
+          <h2><span class="section-intro__style">Бестселлеры</span></h2>
+        </div>
+        <div class="row">
+
+        {% for bestseller in bestsellers %}
+
+          <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="card text-center card-product">
+
+              <a href="/product/{{ bestseller.id }}">
+                <div class="card-product__img">
+                  <img class="card-img" src="uploads/{{ bestseller.photo }}" alt="">
+                  <ul class="card-product__imgOverlay">
+                    <li>
+                      <div class="product-data">
+                        <input name="id" value="{{ bestseller.id }}" type="hidden">
+                        <button class="add-to-cart"><i class="ti-shopping-cart"></i></button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </a>
+
+              <div class="card-body">
+                <p>{{ obj_product.getCategory(bestseller.category_id) }}</p>
+                <h4 class="card-product__title"><a href="/product/{{ bestseller.id }}">{{ bestseller.title }}</a></h4>
+                <p class="card-product__price">{{ bestseller.price|number_format(0) }} ₽</p>
+              </div>
+            </div>
+          </div>
+
+        {% endfor %}
+
+        </div>
+      </div>
+    </section>
+    <!-- ================ trending product section end ================= -->  
+
+    <!-- ================ offer section start ================= --> 
+    <section class="offer" id="parallax-1" data-anchor-target="#parallax-1" data-300-top="background-position: 20px 30px" data-top-bottom="background-position: 0 20px">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-5">
+            <div class="offer__content text-center">
+              <h3>Новые поступления</h3>
+              <h4>Выгодные предложения</h4>
+              <p>Успей заказать новые аксессуары по выгодной цене!</p>
+              <a class="button button--active mt-3 mt-xl-4" href="/products">Смотреть каталог</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ================ offer section end ================= --> 
+
+    {{ obj.getRecommended() }}
+
+  </main>
+{% endblock %}
